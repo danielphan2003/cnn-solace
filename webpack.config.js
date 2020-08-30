@@ -11,7 +11,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const moduleToCdn = require('module-to-cdn');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /*********************************
  *    set up environment variables
@@ -44,16 +43,10 @@ const devDialogEntry = './dev/index.js';
 // define client entry points and output names
 const clientEntrypoints = [
   {
-    name: 'CLIENT - Dialog',
-    entry: './src/client/dialog/index.js',
-    filename: 'dialog',
-    template: './src/client/dialog/index.html',
-  },
-  {
-    name: 'CLIENT - Sidebar',
-    entry: './src/client/sidebar/index.js',
-    filename: 'sidebar',
-    template: './src/client/sidebar/index.html',
+    name: 'CLIENT - App',
+    entry: './src/client/app/index.js',
+    filename: 'app',
+    template: './src/client/app/index.html',
   },
 ];
 
@@ -162,20 +155,20 @@ const DynamicCdnWebpackPluginConfig = {
           version: packageVersion,
           url: `https://unpkg.com/react-transition-group@${packageVersion}/dist/react-transition-group${packageSuffix}`,
         };
-      case 'react-bootstrap':
-        return {
-          name: packageName,
-          var: 'ReactBootstrap',
-          version: packageVersion,
-          url: `https://unpkg.com/react-bootstrap@${packageVersion}/dist/react-bootstrap${packageSuffix}`,
-        };
       case 'lodash': 
         return {
           name: packageName,
           var: 'Lodash',
           version: packageVersion,
           url: `https://cdn.jsdelivr.net/npm/lodash@${packageVersion}/${packageSuffix}`,
-        }
+        };
+      case 'semantic-ui-react':
+        return {
+          name: packageName,
+          var: 'Semantic-UI-React',
+          version: packageVersion,
+          url: `https://cdn.jsdelivr.net/npm/semantic-ui@${packageVersion}/dist/${packageSuffix}`
+        };
       default:
         return null;
     }
@@ -302,7 +295,7 @@ const serverConfig = {
         terserOptions: {
           // ecma 5 is needed to support Rhino "DEPRECATED_ES5" runtime
           // can use ecma 6 if V8 runtime is used
-          ecma: 5,
+          ecma: 6,
           warnings: false,
           parse: {},
           compress: {
