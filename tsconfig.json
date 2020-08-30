@@ -2,6 +2,7 @@
   "compilerOptions": {
     "types": ["gas-types-detailed"],
     "jsx": "react",
+    "lib": ["es6"],
     "esModuleInterop": true
   },
   "skipLibCheck": true
