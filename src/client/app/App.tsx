@@ -3,7 +3,7 @@ import React from "preact";
 import { Suspense } from "preact/compat";
 import { Route, Switch, useLocation } from "wouter-preact";
 
-import { WelcomePage, UpdatePage, HomePage, NotFoundPage } from "./screens";
+import { WelcomePage, UpdatePage, HomePage, NotFoundPage } from "./pages";
 import { Nav } from "./components";
 
 const FallbackCard = () => "Loading...";
